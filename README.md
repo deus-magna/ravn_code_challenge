@@ -21,15 +21,10 @@
     </a>
   </p>
 <br>
-<img width="800px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1620198066/github/rotom_portada.png"/>
+<img width="800px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1645759981/github/ravn.png"/>
 
 ## Goals
 Develop an application consuming APIs that allows validating the knowledge of the candidate.
-
-## Demo
-<img src="https://media.giphy.com/media/yiWCl9U98dMo9024bV/giphy.gif" width="250">
-
-<br>
 
 ## Applied Concepts
 - State management with Cubit
@@ -45,6 +40,23 @@ Develop an application consuming APIs that allows validating the knowledge of th
 - Repository pattern and its data sources
 - Responsive design for web and phones
 
+## Architecture
+For this project I decided to use a clean architecture model divided into three layers: data, domain and presentation (UI), the common elements are found in the core layer.
+<br>
+<br>
+<img width="800px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1645760365/github/architecture.png"/>
+<br>
+<br>
+## Data flow
+<img width="500px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1645760365/github/dataflow.png"/>
+<br>
+<br>
+
+## Dependency Rules
+<img width="500px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1645760365/github/dependency.png"/>
+<br>
+<br>
+
 ## How to install?
 
 This is a project made with Flutter, you must first download the framework from [here](https://flutter.dev/docs/get-started/install).
@@ -59,5 +71,5 @@ flutter run
 ```
 
 For more examples you can see the
-[documentación en linea](https://flutter.dev/docs), with tutorials,
+[online documentation](https://flutter.dev/docs), with tutorials,
 examples, development guides, and the API documentation.
