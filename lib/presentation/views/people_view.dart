@@ -25,7 +25,6 @@ class _PeopleViewState extends State<PeopleView> {
     super.initState();
 
     _scrollController.addListener(() {
-      print('controller');
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         _fetchData();
@@ -41,7 +40,10 @@ class _PeopleViewState extends State<PeopleView> {
 
   void _fetchData() {
     Future.delayed(const Duration(milliseconds: 250), () {
-      context.read<PeopleCubit>().loadPeopleListFromServer();
+      if (context.read<PeopleCubit>().state is! PeopleLoading &&
+          context.read<PeopleCubit>().state is! PeopleFirstLoading) {
+        context.read<PeopleCubit>().loadPeopleListFromServer();
+      }
     });
   }
 
