@@ -21,7 +21,16 @@
     </a>
   </p>
 <br>
+
+## Mobile Design
 <img width="800px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1645759981/github/ravn.png"/>
+
+<br>
+
+## Web Design
+<img width="800px" src="https://res.cloudinary.com/rmontufar1792/image/upload/v1645759981/github/web.png"/>
+
+<br>
 
 ## Goals
 Develop an application consuming APIs that allows validating the knowledge of the candidate.
