@@ -26,11 +26,7 @@ class DetailsContainer extends StatelessWidget {
 
   List<Widget> _buildVehicles(People people) {
     return people.vehiclesList!
-        .map((vehicle) => DetailCell(
-              value: vehicle,
-              label: vehicle,
-              isVehicle: true,
-            ))
+        .map((vehicle) => DetailCell(label: vehicle))
         .toList();
   }
 }

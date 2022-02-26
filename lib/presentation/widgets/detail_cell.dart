@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:ravn_code_challenge/core/extensions/string_extension.dart';
 import 'package:ravn_code_challenge/core/framework/colors.dart';
 
+/// Figma conventions are renamed,
+/// because the framework already has a widget called DataCell.
 class DetailCell extends StatelessWidget {
   const DetailCell({
     Key? key,
-    required this.value,
+    this.value,
     required this.label,
-    this.isVehicle = false,
   }) : super(key: key);
 
-  final String value;
+  final String? value;
   final String label;
-  final bool isVehicle;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +30,10 @@ class DetailCell extends StatelessWidget {
                     .headline2!
                     .copyWith(color: textLight),
               ),
-              isVehicle
+              value == null
                   ? const SizedBox.shrink()
                   : Text(
-                      value.capitalize(),
+                      value!.capitalize(),
                       style: Theme.of(context).textTheme.headline2,
                     ),
             ],
