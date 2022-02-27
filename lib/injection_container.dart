@@ -21,5 +21,5 @@ Future<void> init() async {
     ..registerLazySingleton<PeopleRemoteDataSource>(
         () => PeopleRemoteDataSourceImpl(client: sl()))
     // External dependencies
-    ..registerLazySingleton(() => http.Client());
+    ..registerLazySingleton(http.Client.new);
 }

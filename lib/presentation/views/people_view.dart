@@ -154,7 +154,6 @@ class _PeopleViewState extends State<PeopleView> {
       );
 
   void _showDetailsView(People people, bool isDesktop) {
-    print('presed presed');
     if (isDesktop) {
       setState(() {
         _selectedPeople = people;

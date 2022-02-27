@@ -19,7 +19,8 @@ void main() {
     usecase = GetPeopleFromServer(mockPeopleRepository);
   });
 
-  final tPeopleResponse = peopleFromJson(fixture('people_response.json'));
+  final tPeopleResponse =
+      peopleResponseFromJson(fixture('people_response.json'));
   final tServerFailure = ServerFailure.general();
 
   test('should get People from the repository', () async {

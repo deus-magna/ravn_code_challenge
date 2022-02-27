@@ -20,9 +20,10 @@ void main() {
     peopleCubit = PeopleCubit(getPeopleFromServer: mockGetPeopleFromServer);
   });
   group('PeopleCubit', () {
-    final tPeopleResponse = peopleFromJson(fixture('people_response.json'));
+    final tPeopleResponse =
+        peopleResponseFromJson(fixture('people_response.json'));
     final tPeopleResponse2 =
-        peopleFromJson(fixture('people_twice_response.json'));
+        peopleResponseFromJson(fixture('people_twice_response.json'));
     final tPeople = tPeopleResponse.results;
     final tPeople2 = tPeopleResponse2.results;
 

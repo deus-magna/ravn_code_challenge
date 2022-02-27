@@ -9,20 +9,18 @@ class DetailsContainer extends StatelessWidget {
   final People people;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const SectionHeader(title: 'General Information'),
-        DetailCell(label: 'Eye Color', value: people.eyeColor),
-        DetailCell(label: 'Hair Color', value: people.hairColor),
-        DetailCell(label: 'Skin Color', value: people.skinColor),
-        DetailCell(label: 'Birth Year', value: people.birthYear),
-        const SectionHeader(title: 'Vehicles'),
-        ..._buildVehicles(people),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SectionHeader(title: 'General Information'),
+          DetailCell(label: 'Eye Color', value: people.eyeColor),
+          DetailCell(label: 'Hair Color', value: people.hairColor),
+          DetailCell(label: 'Skin Color', value: people.skinColor),
+          DetailCell(label: 'Birth Year', value: people.birthYear),
+          const SectionHeader(title: 'Vehicles'),
+          ..._buildVehicles(people),
+        ],
+      );
 
   List<Widget> _buildVehicles(People people) {
     return people.vehiclesList!

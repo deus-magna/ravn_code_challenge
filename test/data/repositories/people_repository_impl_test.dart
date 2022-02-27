@@ -26,7 +26,8 @@ void main() {
 
   group('getPeople', () {
     const tUrl = 'https://swapi.dev/api/people';
-    final tPeopleResponse = peopleFromJson(fixture('people_response.json'));
+    final tPeopleResponse =
+        peopleResponseFromJson(fixture('people_response.json'));
     final tPlanetResponse = planetFromJson(fixture('planet_response.json'));
     final tSpecieResponse = specieFromJson(fixture('specie_response.json'));
     final tVehicleResponse = vehicleFromJson(fixture('vehicle_response.json'));

@@ -20,25 +20,9 @@ class PeopleRepositoryImpl implements PeopleRepository {
   Future<Either<Failure, PeopleResponse>> getPeople(String next) async {
     try {
       final peopleResponse = await remoteDataSource.getPeople(next);
-
-      for (var i = 0; i < peopleResponse.results.length; i++) {
-        final people = peopleResponse.results[i];
-        final homeworld = await remoteDataSource.getPlanet(people.homeworld);
-        final specie = people.species.isEmpty
-            ? const Specie(name: 'Human')
-            : await remoteDataSource.getSpecie(people.species.first);
-        peopleResponse.results[i].subheader =
-            '${specie.name} from ${homeworld.name}';
-
-        final vehicles = <String>[];
-        for (final url in people.vehicles) {
-          final vehicle = await remoteDataSource.getVehicle(url);
-          vehicles.add(vehicle.name);
-        }
-        peopleResponse.results[i].vehiclesList = vehicles;
-      }
-
-      return Right(peopleResponse);
+      final people = await _getExtraValues(peopleResponse);
+      final results = peopleResponse.copyWith(results: people);
+      return Right(results);
     } on ServerException catch (_) {
       return Left(ServerFailure.general());
     } on TimeoutException catch (_) {
@@ -46,5 +30,36 @@ class PeopleRepositoryImpl implements PeopleRepository {
     } on SocketException catch (_) {
       return Left(ServerFailure.general());
     }
+  }
+
+  Future<List<People>> _getExtraValues(PeopleResponse peopleResponse) async {
+    final peopleList = peopleResponse.results;
+    return Future.wait(peopleList.map((people) async {
+      final subheader =
+          await _getPlanetAndSpecie(people.homeworld, people.species);
+      final vehicles = await _getVehicles(people.vehicles);
+      return people.copyWith(subheader: subheader, vehiclesList: vehicles);
+    }).toList());
+  }
+
+  // Human is used as the default specie since the API doesn't enter humans
+  // in the species list even though the Figma UI includes it.
+  Future<String> _getPlanetAndSpecie(
+      String homeworldUrl, List<String> species) async {
+    final homeworld = await remoteDataSource.getPlanet(homeworldUrl);
+    final specie = species.isEmpty
+        ? const Specie(name: 'Human')
+        : await remoteDataSource.getSpecie(species.first);
+
+    return '${specie.name} from ${homeworld.name}';
+  }
+
+  Future<List<String>> _getVehicles(List<String> vehiclesList) async {
+    final vehicles = <String>[];
+    for (final url in vehiclesList) {
+      final vehicle = await remoteDataSource.getVehicle(url);
+      vehicles.add(vehicle.name);
+    }
+    return vehicles;
   }
 }

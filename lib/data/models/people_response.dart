@@ -2,42 +2,52 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-PeopleResponse peopleFromJson(String str) =>
+PeopleResponse peopleResponseFromJson(String str) =>
     PeopleResponse.fromJson(json.decode(str));
 
 class PeopleResponse extends Equatable {
   const PeopleResponse({
     required this.count,
     required this.next,
-    required this.previous,
     required this.results,
   });
 
   factory PeopleResponse.fromJson(Map<String, dynamic> json) => PeopleResponse(
         count: json['count'],
         next: json['next'],
-        previous: json['previous'],
         results: List<People>.from(
-          (json['results'] as List).map((x) => People.fromJson(x)),
+          (json['results'] as List).map<People>(peopleFromJson),
         ),
       );
 
   final int count;
   final String next;
-  final dynamic previous;
   final List<People> results;
+
+  PeopleResponse copyWith({
+    int? count,
+    String? next,
+    List<People>? results,
+  }) {
+    return PeopleResponse(
+      count: count ?? this.count,
+      next: next ?? this.next,
+      results: results ?? this.results,
+    );
+  }
 
   @override
   List<Object?> get props => [
         count,
         next,
-        previous,
         results,
       ];
 }
 
+People peopleFromJson(dynamic json) => People.fromJson(json);
+
 class People extends Equatable {
-  People(
+  const People(
       {required this.name,
       required this.height,
       required this.mass,
@@ -89,8 +99,48 @@ class People extends Equatable {
   final DateTime created;
   final DateTime edited;
   final String url;
-  String? subheader;
-  List<String>? vehiclesList;
+  final String? subheader;
+  final List<String>? vehiclesList;
+
+  People copyWith({
+    String? name,
+    String? height,
+    String? mass,
+    String? hairColor,
+    String? skinColor,
+    String? eyeColor,
+    String? birthYear,
+    String? homeworld,
+    List<String>? films,
+    List<String>? species,
+    List<String>? vehicles,
+    List<String>? starships,
+    DateTime? created,
+    DateTime? edited,
+    String? url,
+    String? subheader,
+    List<String>? vehiclesList,
+  }) {
+    return People(
+      name: name ?? this.name,
+      height: height ?? this.height,
+      mass: mass ?? this.mass,
+      hairColor: hairColor ?? this.hairColor,
+      skinColor: skinColor ?? this.skinColor,
+      eyeColor: eyeColor ?? this.eyeColor,
+      birthYear: birthYear ?? this.birthYear,
+      homeworld: homeworld ?? this.homeworld,
+      films: films ?? this.films,
+      species: species ?? this.species,
+      vehicles: vehicles ?? this.vehicles,
+      starships: starships ?? this.starships,
+      created: created ?? this.created,
+      edited: edited ?? this.edited,
+      url: url ?? this.url,
+      subheader: subheader,
+      vehiclesList: vehiclesList,
+    );
+  }
 
   @override
   List<Object?> get props => [
@@ -110,5 +160,6 @@ class People extends Equatable {
         edited,
         url,
         subheader,
+        vehiclesList
       ];
 }

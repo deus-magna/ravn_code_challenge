@@ -22,7 +22,7 @@ class PeopleRemoteDataSourceImpl extends PeopleRemoteDataSource {
     final response = await _get(url);
 
     if (response.statusCode == 200) {
-      return peopleFromJson(response.body);
+      return peopleResponseFromJson(response.body);
     } else {
       throw ServerException('Failed to Load Data', 'Error');
     }
