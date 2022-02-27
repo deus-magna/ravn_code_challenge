@@ -72,11 +72,17 @@ This is a project made with Flutter, you must first download the framework from 
 
 Run these commands in your terminal
 
+Launch an emulator or connect an android or iOS device to your pc
+
 ```sh
 git clone https://github.com/deus-magna/ravn_code_challenge
 cd ravn_code_challenge
 flutter packages get
 flutter run
+```
+If you want to run this project on web run this command:
+```
+$ flutter run -d chrome
 ```
 
 For more examples you can see the
